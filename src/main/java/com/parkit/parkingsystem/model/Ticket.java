@@ -59,7 +59,4 @@ public class Ticket {
         this.outTime = outTime;
     }
 
-    public boolean getDiscount() {return discount; }
-
-    public void setDiscount (boolean discount) {this.discount = discount; }
 }
