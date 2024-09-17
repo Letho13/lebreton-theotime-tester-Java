@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -85,6 +86,7 @@ public class ParkingServiceTest {
         when(ticketDAO.getTicket(anyString())).thenReturn(ticket);
         when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(false);
         parkingService.processExitingVehicle();
+
     }
 
     @Test
@@ -94,7 +96,7 @@ public class ParkingServiceTest {
         ParkingSpot parkingSpot = parkingService.getNextParkingNumberIfAvailable();
         verify(parkingSpotDAO, times(1)).getNextAvailableSlot(any(ParkingType.class));
         assertEquals(parkingSpot.getId(), 1);
-        //System.out.println(parkingSpot.getId());
+
     }
 
     @Test
@@ -102,14 +104,14 @@ public class ParkingServiceTest {
         when(parkingSpotDAO.getNextAvailableSlot(any(ParkingType.class))).thenReturn(0);
         when(inputReaderUtil.readSelection()).thenReturn(1);
         ParkingSpot parkingSpot = parkingService.getNextParkingNumberIfAvailable();
-        verify(parkingSpotDAO, times(1)).getNextAvailableSlot(any(ParkingType.class));
+        assertNull(parkingSpot);
     }
 
     @Test
     public void testGetNextParkingNumberIfAvailableParkingNumberWrongArgument(){
         when(inputReaderUtil.readSelection()).thenReturn(3);
         ParkingSpot parkingSpot = parkingService.getNextParkingNumberIfAvailable();
-
+        assertNull(parkingSpot);
     }
 
     @Test
