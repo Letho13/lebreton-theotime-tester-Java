@@ -5,7 +5,7 @@ import com.parkit.parkingsystem.model.Ticket;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Calendar;
+
 
 public class FareCalculatorService {
 
